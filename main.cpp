@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
+
 using namespace std;
 
 string addToPassword(int numCharacters, string charList) {
@@ -10,6 +13,16 @@ string addToPassword(int numCharacters, string charList) {
     int randomIndex = rand() % charList.length();
     password.push_back(charList[randomIndex]);
   };
+  return password;
+}
+
+string randomisePassword(string password) {
+  int n = password.length();
+
+  for (int i = n - 1; i > 0; i--){
+    int j = rand() % (i + 1);
+    swap(password[i], password[j]);
+  }
   return password;
 }
 
@@ -28,7 +41,11 @@ int main() {
   PASSWORD += addToPassword(NUM_CHARS, LOWERCASE_CHARS);
   PASSWORD += addToPassword(NUM_CHARS, NUMBER_CHARS);
   PASSWORD += addToPassword(NUM_CHARS, SPECIAL_CHARS);
-  cout << PASSWORD;
+  cout << PASSWORD;  
   
+  string shuffledPassword = randomisePassword(PASSWORD);
+  cout << shuffledPassword;
   return 0;
 }
+
+
